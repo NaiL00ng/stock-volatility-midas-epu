@@ -37,6 +37,8 @@ python3.12 -m venv .venv
 - [研究限制](docs/research-review.md)、[数据说明](data/README.md)、[上传清单](docs/upload-manifest.md)。
 - [版本说明](docs/release-notes.md)：当前验证范围、仓库信息与发布状态；[许可范围](docs/licensing.md)及[第三方来源](THIRD_PARTY_NOTICES.md)。
 
+若GitHub内嵌PDF预览无法加载，可直接下载[中文PDF](https://raw.githubusercontent.com/NaiL00ng/stock-volatility-midas-epu/main/paper/thesis-public.pdf)或[English PDF](https://raw.githubusercontent.com/NaiL00ng/stock-volatility-midas-epu/main/paper/thesis-en.pdf)，也可从克隆后的paper目录打开。
+
 ## 当前CSI300结果
 
 测试1919条。下表为修订实验；历史CSV与图件保留在原结果目录，不静默覆盖。

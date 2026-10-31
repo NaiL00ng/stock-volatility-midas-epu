@@ -8,6 +8,8 @@
 | English research edition | [PDF](thesis-en.pdf)、[LaTeX entry](english-source/main.tex) | 英文研究稿，按研究论文结构重组表述；不是逐句翻译，不是新增实验或独立验证 |
 | 共用参考文献 | [BibTeX](references.bib) | 保留原学者与公开文献机构的真实归属 |
 
+若GitHub内嵌PDF预览无法加载，可直接下载[中文PDF](https://raw.githubusercontent.com/NaiL00ng/stock-volatility-midas-epu/main/paper/thesis-public.pdf)或[English PDF](https://raw.githubusercontent.com/NaiL00ng/stock-volatility-midas-epu/main/paper/thesis-en.pdf)，也可从克隆后的paper目录打开。
+
 英文稿覆盖目标定义、数据与样本、HAR/GARCH/XGBoost、MIDAS与稳定DEC求解、XGB-AR消融、三市场结果、30组区间设置的核心汇总、探索性推断、历史训练配置及数值控制。现有研究具备编写英文研究稿的完整结构和证据，但仍不能据此声称达到期刊录用标准或已验证实时预测能力。
 
 两个版本共用相同结果CSV和原图，不独立维护一套英文实验值。PDF保留上传前已审阅的0.5-review成品；许可页中的“本地修订”“候选版”和未提供仓库URL的表述记录编译时状态，当前获取与引用地址以本页为准。公开上传不产生新实验或改变论文数值。原始数据不随包提供，完整实验需要自备授权输入；最小合成示例不代表论文结果。研究方法、当前/历史入口和样本口径见[版本表](../docs/version-map.md)、[运行说明](../docs/reproduction.md)与[数据说明](../data/README.md)。

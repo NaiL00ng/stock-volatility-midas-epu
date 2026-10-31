@@ -58,6 +58,6 @@
 | GitHub仓库 | [NaiL00ng/stock-volatility-midas-epu](https://github.com/NaiL00ng/stock-volatility-midas-epu)，公开 |
 | 版本 | 0.5-review，探索性研究档案；不提升为已验证的实时系统 |
 | Git提交身份 | Boursin Nickel；使用目标账号设置页核实的GitHub noreply邮箱 |
-| 上传后的验收 | 首次上传后另从远程克隆并运行；实际结果统一见[验证记录](validation.md)，不预先宣称通过 |
+| 上传后的验收 | 2026-10-31匿名克隆190文件核验通过；macOS ARM64新venv安装26个wheel、最小示例与独立检查通过；具体范围见[验证记录](validation.md) |
 
 两份PDF和研究源码沿用已审阅的修订稿；当前获取与引用地址见[论文说明](../paper/README.md)及[CITATION.cff](../CITATION.cff)。历史准备记录中的“尚未上传”等指相应阶段。论文结果、数据授权边界和研究限制不因公开上传而改变。
