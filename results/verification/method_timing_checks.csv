@@ -1,0 +1,4 @@
+market,retained_rows,zero_volume_source_rows,targets_on_zero_volume_rows,dec_stale_lag_count,dec_future_lag_count,confirmed_holiday_target_count
+csi300,3919,0,0,0,0,0
+sse50,3915,1,1,1,0,1
+nasdaq,4054,4,4,0,0,0

@@ -1,0 +1,3 @@
+# Preserve the exact archived bytes used by docs/checksums.sha256.
+# Do not apply platform-dependent LF/CRLF conversion on add or checkout.
+* -text

@@ -1,0 +1,8 @@
+{
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "pandas": "3.1.0",
+  "statsmodels": "0.15.0",
+  "xgboost": "2.0.3",
+  "xgboost_binary_sha256": "426460f3aaf2c0cb5b6bd44230e89108da2931aaebdcb025c0efa187dfe4f96b"
+}

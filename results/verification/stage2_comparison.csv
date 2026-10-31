@@ -1,0 +1,4 @@
+market,n,max_abs_error,rmse,K,weight_type,archived_K,archived_weight_type,optimizer_failures
+csi300,1919,0.0026698168030776515,0.0003555246181826777,24,expalmon,24,expalmon,0
+SSE50,1915,5.57330836983283e-05,8.685315027566812e-06,24,expalmon,24,expalmon,0
+NASDAQZH,1554,0.0030347800999592778,0.0004201971601161118,12,beta,12,beta,0

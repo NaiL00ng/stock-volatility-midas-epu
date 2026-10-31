@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-31",
+  "status": "Rules fixed before evaluating revised out-of-sample forecasts; retrospective methodological audit, not a preregistered new study.",
+  "objective": "Profiled residual mean squared error on available training rows only",
+  "weights": "Keep historical normalized Beta (raw floor 1e-12) and exponential Almon definitions and parameter bounds",
+  "optimizer": "Analytic gradient; deterministic bounded multistart L-BFGS-B; ftol=1e-14, gtol=1e-9; stationarity acceptance <=1e-6; SLSQP retry for nonstationary candidates",
+  "starts_beta": [[0.05,0.5,1.5,5,20],[0.05,0.5,2,5,20]],
+  "starts_expalmon": [[-5,-2.5,0,2.5,5],[-5,-2.5,0,2.5,5]],
+  "additional_start_expalmon": [-0.2,-0.02],
+  "selection": "Keep 299/200 validation train/score split, K in 6/12/24, both families, select by validation MSE; refit every 60 retained rows",
+  "ablation": "Add XGB + intercept + lagged OOS residual by OLS, same expanding training residuals and refit schedule; no EPU and no additional hyperparameter selection",
+  "data": "Historical inputs for optimizer isolation; revised headline uses SSE50 with confirmed 2018-06-18 holiday row removed before feature/target creation. CSI300 and Nasdaq inputs unchanged.",
+  "evaluation": "Report all MSE, MAE, QLIKE and Bias. Do not select optimizer settings on test losses. CSI300 interval settings unchanged; compare on common dates. No causal or real-time EPU claim."
+}

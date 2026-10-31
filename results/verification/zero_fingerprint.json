@@ -1,0 +1,9 @@
+{
+  "position_before_return_index": 2053,
+  "preceding_return_date": "2018-06-15",
+  "following_return_date": "2018-06-19",
+  "max_lb_error": 9.094947017729282e-13,
+  "current_return_count": 3941,
+  "synthetic_count": 3942,
+  "synthetic_is_evidence_only": true
+}

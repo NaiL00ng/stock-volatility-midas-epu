@@ -1,0 +1,20 @@
+\section*{摘要}\addcontentsline{toc}{section}{摘要}
+本文比较HAR、GARCH(1,1)、XGB-Market、仅含截距及滞后残差的XGB-AR，以及加入MIDAS-EPU的动态误差修正模型DEC，预测下一交易日平方收益率的对数代理。公开修订版以解析梯度、多起点剖面最小二乘替代旧版单起点数值差分求解，并在特征构造前剔除上证50已确认的休市日记录。模型规格仍按验证集MSE选择，不以测试损失调整求解规则。
+
+沪深300中，DEC的MSE为5.112644，高于XGB-Market的5.099716；QLIKE为3.536964，低于其4.951636。相对XGB-AR，三个市场的DEC均降低QLIKE、提高MSE；中国两市场的MAE下降，纳斯达克MAE上升。因此加入EPU提供的是本次设定下依赖损失函数的增量预测表现，不是全面优势或政策因果效应。纳斯达克的验证集最优规格由旧版12个月Beta改为12个月指数Almon；相对旧DEC，测试MSE下降而QLIKE上升。
+
+重新计算五模型的30组滚动残差区间设置。共同1859个日期上，90\%区间、窗口250时，DEC得分10.1995，高于HAR的9.6973、XGB-Market的9.8534及XGB-AR的9.8793；DEC没有改善这些基准的区间质量。区间针对未来观测代理，不是潜在条件方差。
+
+历史XGBoost的6888条预测已通过Windows列抽样兼容构建逐点重现；旧DEC仍不能逐点还原，历史环境不能唯一识别。新DEC在两套数值依赖下的最大预测差异小于$10^{-7}$，但多起点搜索不保证全局最优。由于这是已查看历史结果后的回顾性重分析，EPU发布时点、历史修订、完整交易日历及独立留出样本仍待核验；HAC及多重比较调整仅为探索性诊断。
+
+\noindent\textbf{关键词：}波动率代理；XGBoost；MIDAS；经济政策不确定性；数值稳定性；消融比较
+\clearpage
+\section*{Abstract}\addcontentsline{toc}{section}{Abstract}
+This revision compares HAR, GARCH(1,1), XGB-Market, a residual-only XGB-AR correction, and MIDAS-EPU dynamic error correction (DEC). The target is log next-day squared returns plus an offset. Analytic gradients and deterministic bounded multistart replace the legacy single-start numerical optimizer. A confirmed SSE50 holiday row is removed before constructing features and targets. Specification selection still uses validation MSE, without tuning the solver to test losses.
+
+For CSI300, DEC has MSE 5.112644 and QLIKE 3.536964, compared with 5.099716 and 4.951636 for XGB-Market. Relative to XGB-AR, DEC lowers QLIKE but raises MSE in all three markets; MAE falls in the two Chinese samples and rises in Nasdaq. The EPU-augmented model therefore shows loss-dependent incremental performance under this design, not universal superiority or a causal policy effect. Nasdaq's selected specification changes from 12-month Beta to 12-month exponential Almon. Compared with legacy DEC, test MSE improves while QLIKE worsens.
+
+All 30 rolling-residual interval settings are recomputed for five models. On 1,859 common dates, with 90\% intervals and a calibration window of 250, DEC scores 10.1995 versus 9.6973 for HAR, 9.8534 for XGB-Market and 9.8793 for XGB-AR. These intervals concern an observed proxy, not latent variance.
+
+A Windows-compatible column sampler reproduces all 6,888 archived XGBoost forecasts exactly; the original DEC environment remains unidentified. Revised DEC forecasts differ by less than $10^{-7}$ across two numerical stacks. Multistart does not certify a global optimum. This retrospective reanalysis does not supply a fresh holdout or verified real-time EPU vintages. HAC and multiplicity-adjusted results remain exploratory diagnostics.
+\clearpage

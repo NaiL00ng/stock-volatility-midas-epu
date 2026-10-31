@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "Please cite Boursin Nickel and version 0.5-review, identifying this as an exploratory research archive. Code: Apache-2.0; original paper, documentation and figures: CC BY 4.0, subject to the stated third-party and data boundaries."
+title: "Stock Volatility Forecasting with MIDAS EPU Correction"
+authors:
+  - family-names: "Boursin Nickel"
+type: software
+version: "0.5-review"
+license: Apache-2.0
+# This software citation describes the code license; original content uses CC-BY-4.0.
+# See docs/licensing.md and paper/README.md for scope and paper citations.
+repository-code: "https://github.com/NaiL00ng/stock-volatility-midas-epu"
+url: "https://github.com/NaiL00ng/stock-volatility-midas-epu"
+# The repository is public. A release date is added only after publication.
+abstract: "Retrospective volatility forecasting study with stable multistart DEC estimation, residual-only ablation and common-date intervals. Historical evidence is retained; real-time EPU availability remains unverified."

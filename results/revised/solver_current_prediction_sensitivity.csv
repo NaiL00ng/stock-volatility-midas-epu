@@ -1,0 +1,4 @@
+market,n,K,family,max_prediction_delta,rmse_prediction_delta
+csi300,1919,24,expalmon,0.0,0.0
+sse50,1919,24,expalmon,0.0,0.0
+nasdaq,1554,12,expalmon,0.0,0.0

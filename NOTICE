@@ -1,0 +1,30 @@
+Stock Volatility Forecasting with MIDAS EPU Correction
+Copyright 2026 Boursin Nickel
+
+The author's licensable code in scripts/ and examples/, executable examples
+in documentation, configurations in configs/, dependency requirement files,
+and repository runtime configuration are licensed under the Apache License,
+Version 2.0. See LICENSE.
+
+The author's licensable paper text and LaTeX content in paper/, narrative
+documentation, citation metadata, and original research figures and tables
+are licensed under Creative Commons Attribution 4.0 International. See
+LICENSE-CONTENT.txt. This also applies to any copyright or database rights
+held by the author in the distributed numerical compilations and summaries;
+it does not assert exclusive rights in individual facts or numbers.
+
+Third-party material retains its own rights and license conditions. In
+particular, the sampling compatibility patch references or adapts behavior
+from XGBoost v2.0.3 (Copyright (c) 2019 by Contributors; Apache-2.0) and
+Microsoft STL vs-2022-17.6 (Copyright (c) Microsoft Corporation.;
+Apache-2.0 WITH LLVM-exception). See THIRD_PARTY_NOTICES.md and third-party/.
+The LLVM exception is not a blanket license exception for this project.
+Embedded fonts and cited publications retain their respective rights.
+
+These project licenses do not grant rights to obtain, use, or redistribute
+underlying market or EPU data. Raw workbooks, per-period data and prediction
+panels, model binaries, and local logs are outside this distribution.
+See docs/licensing.md and data/README.md for scope.
+
+This notice is informational and does not modify the license terms.
+Academic citation is encouraged; it is not an additional Apache-2.0 condition.

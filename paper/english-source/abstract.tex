@@ -1,0 +1,13 @@
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+This study examines whether monthly economic policy uncertainty (EPU) information improves daily stock-index volatility-proxy forecasts after accounting for predictable errors in a market-only machine-learning model. The target is the logarithm of the next trading day's squared return plus a small offset. Comparisons include HAR, Student-$t$ GARCH(1,1), XGB-Market, a residual-only autoregressive correction (XGB-AR), and a mixed-data sampling (MIDAS) dynamic error correction (DEC) model.
+
+A retrospective audit motivates three revisions: bounded multistart estimation with an analytic profiled gradient, removal of a confirmed SSE50 holiday record before feature construction, and a residual-only ablation. Specifications are selected using validation MSE, not test loss. For CSI300, revised DEC has log-MSE 5.112644 versus 5.099716 for XGB-Market, but QLIKE 3.536964 versus 4.951636. Relative to XGB-AR, DEC reduces QLIKE and increases MSE in all three markets; its MAE advantage is confined to the two Chinese markets. Nasdaq's selected specification changes from a 12-month Beta weighting scheme to a 12-month exponential Almon scheme. Relative to archived DEC, its MSE improves while QLIKE deteriorates.
+
+Five models are evaluated under 30 rolling-residual interval settings. On 1859 common dates, 90\% intervals with a calibration window of 250 give DEC an interval score of 10.1995, compared with 9.6973 for HAR, 9.8534 for XGB-Market, and 9.8793 for XGB-AR. DEC therefore does not improve interval quality against these benchmarks. These intervals concern an observed proxy, not latent conditional variance.
+
+All 6888 archived XGBoost predictions can be matched using a documented sampling-compatible build. The original DEC numerical environment remains unidentified. Revised DEC predictions differ by less than $10^{-7}$ across the two examined numerical-library stacks, but numerical stability is not proof of a global optimum. Missing real-time EPU vintages, prior exposure to historical results, model selection, and dependence limit inferential claims. The contribution is a reproducible correction and comparison framework with loss-dependent findings, not evidence of universal forecasting superiority or a causal EPU effect.
+
+\medskip
+\noindent\textbf{Keywords:} volatility proxy; economic policy uncertainty; MIDAS; XGBoost; dynamic error correction; numerical reproducibility; prediction intervals.
+\clearpage

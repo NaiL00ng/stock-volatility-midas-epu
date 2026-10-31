@@ -1,0 +1,4 @@
+market,price_file,epu_file,raw_rows,prepared_rows,archived_rows,dates_match,numeric_columns,all_numeric_match,max_abs_error,flags_match
+csi300,CSI300_daily_20100104_20260331.xlsx,epu_newVersion_2000-2026.xlsx,3942,3919,3919,True,41,True,1.7763568394002505e-15,True
+sse50,SSE50_daily_20100104_20260331.xlsx,epu_newVersion_2000-2026.xlsx,3943,3915,3915,True,41,True,1.7763568394002505e-15,True
+nasdaq,NASDAQZH_daily_20100101_20260331.xlsx,US_Policy_Uncertainty_Data.xlsx,4085,4054,4054,True,41,True,1.7763568394002505e-15,True

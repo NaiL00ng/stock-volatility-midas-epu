@@ -1,0 +1,12 @@
+# Fresh dependencies tested on macOS ARM64, Ubuntu ARM64, and Windows ARM64 with x64 Python.
+# Actual versions and scope: docs/platform-validation.md.
+# Constraints pin the recorded dependencies without installing the full research stack.
+# Platform-only additions may not be constrained; native runtimes are documented in examples/README.md.
+-c requirements-reproduction.txt
+numpy==2.5.4
+pandas==3.1.0
+scipy==1.18.1
+statsmodels==0.15.0
+xgboost==3.4.1
+scikit-learn==1.9.1
+matplotlib==3.11.2

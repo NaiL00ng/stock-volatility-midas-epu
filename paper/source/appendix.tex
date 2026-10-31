@@ -1,0 +1,64 @@
+\appendix
+\section{训练配置、平台抽样与复现证据}
+现存主脚本与历史讨论记录均使用深度4、300棵树的设定。先前仅切换Python依赖版本仍未匹配；进一步保持参数与输入不变，只替换列抽样中的平台洗牌实现后，XGBoost 2.0.3的CPU直方图训练逐点重现三个市场共6888条存档预测。兼容实现采用Microsoft STL 17.6的列洗牌规则，保留原mt19937随机引擎；没有调整随机种子来追拟合历史结果，也没有把测试损失用于选参。原生macOS抽样作为对照仍不匹配。
+
+这确认了一套能生成全部存档XGBoost预测的数值等价配置，支持现存主脚本与最终结果对应；它不能唯一确定当时安装的版本、编译器或全部系统库。原稿附录中的深度3、最小子节点权重5、L1系数0及早停50不适合作为最终实验说明，现以匹配证据支持的配置更正如下。
+
+\begin{table}[htbp]\centering\caption{与存档XGBoost预测数值匹配的配置}
+\begin{tabular}{ll}\toprule 参数 & 数值或实际行为\\\midrule
+\texttt{n\_estimators / learning\_rate} & 300 / 0.05\\
+\texttt{max\_depth / min\_child\_weight} & 4 / 3\\
+\texttt{subsample / colsample\_bytree} & 0.8 / 0.8\\
+\texttt{reg\_alpha / reg\_lambda} & 0.1 / 1.0\\
+\texttt{objective / random\_state} & 平方误差 / 2026\\
+树构造 / 最大直方图箱数 & CPU hist / 256\\
+初始截距 & 每次拟合按训练标签估计\\
+列抽样 & Microsoft STL 17.6兼容洗牌\\
+早停、缩尾、标准化 & 该匹配流程均未采用\\
+HAR / XGB / GARCH重估间隔 & 20条保留观测\\
+MIDAS重估间隔 & 60条保留观测\\
+MIDAS候选窗口 / 权重族 & 6、12、24个月 / Beta、指数Almon\\\bottomrule
+\end{tabular}\end{table}
+
+CSI300存档划分为1500/500/1919，上证50为1500/500/1915，纳斯达克为2000/500/1554。XGBoost的九个市场特征及顺序与随附配置一致。线程数1、2、4、8及默认值在首验证块控制检查中预测相同；全样本匹配运行使用4线程。
+
+\paragraph{完整XGBoost与DEC复算}
+表\ref{tab:reproduction_difference}比较原始输入重新构造后、使用上述兼容构建生成的预测。XGBoost比较全部验证与测试预测，DEC比较测试预测；差异是对数预测值的逐点绝对差异。DEC没有使用存档XGBoost预测作为输入，而使用本次重新训练得到的相同基准预测。
+
+\begin{table}[htbp]\centering\caption{平台抽样兼容后相对存档预测的最大绝对差异}\label{tab:reproduction_difference}
+\begin{tabular}{lrrr}\toprule 市场 & XGBoost条数 & XGBoost差异 & DEC差异\\\midrule
+CSI300 & 2419 & 0 & 0.002670\\
+上证50 & 2415 & 0 & \(1.28\times10^{-5}\)\\
+纳斯达克 & 2054 & 0 & 0.003035\\\bottomrule\end{tabular}\end{table}
+
+DEC仍未达到全部逐点 $10^{-6}$ 容差。固定基准预测后，更换数值库组合或将等价输入作CSV往返，均会使第二阶段小幅变化；这验证了数值敏感性，但不构成对历史差异唯一原因的识别。本次所选窗口和权重族仍与存档一致。原图件元数据为Matplotlib 3.7.2，只能支持制图环境线索，不能推导原SciPy或XGBoost版本。
+
+前一轮原生macOS、XGBoost 3.4.1试跑的三市场最大差异分别为HAR $4.62\times10^{-14}$、GARCH $7.14\times10^{-5}$、XGBoost 1.7851、DEC 1.5048。该记录保留于项目，不能与本表兼容构建混淆。\path{requirements-reproduction.txt}仍记录普通运行环境；兼容构建方法、补丁、依赖与二进制指纹另行记录。仅安装官方macOS版2.0.3不会自动得到Windows列抽样行为。
+
+\paragraph{上证50日历清洗的新对照试验}
+在同一兼容构建与数值环境下，分别对原输入和删除2018年6月18日休市行后重新构造的输入，重训HAR、GARCH、XGBoost及DEC。修正后样本为1500/500/1919。为避免不同样本和错误目标影响比较，表\ref{tab:calendar_sensitivity}统一到1915个共同测试日期，并对两组预测均使用修正后的目标。该表是本次新增试验，不是对历史表的静默替换。
+
+\begin{table}[htbp]\centering\caption{日历修正对照：共同日期及统一修正目标}\label{tab:calendar_sensitivity}
+\begin{tabular}{lrrrr}\toprule
+模型 & 原输入MSE & 修正MSE & 原输入QLIKE & 修正QLIKE\\\midrule
+HAR & 4.820334 & 4.820717 & 3.877497 & 3.874467\\
+GARCH & 7.521221 & 7.524687 & 1.585780 & 1.585427\\
+XGB-Market & 4.902582 & 4.933710 & 4.507373 & 4.756812\\
+DEC & 4.931264 & 4.962050 & 3.528922 & 3.672719\\
+\bottomrule\end{tabular}\end{table}
+
+上一轮单起点DEC清洗对照的QLIKE排序保持为GARCH、DEC、HAR、XGBoost，但数值发生变化。影响不只是一条人工目标，还包括滚动特征、训练样本和重估位置；不能只删一条损失来替代全流程修正。该日历对照自身不解决其他日期真实性、EPU发布时间和数值稳定性；本轮正文另用新DEC求解器及消融对照，CSI300区间也已重新计算，不能与该历史对照混同。
+
+\section{DEC方法修订的验证与证据边界}
+历史输入的旧DEC复现相对存档：CSI300的MSE增加约0.000094、QLIKE减少约0.000362；上证50和纳斯达克的MSE、MAE及QLIKE均有极小下降。这些只是数值环境差异，不改变模型排序。正文的稳定求解是另一组方法修订结果，不称为历史DEC的精确重现。
+
+本轮包含三个正文市场和上证50历史输入控制，共146次规格估计与测试期重估，所有选中解均满足平均SSE投影梯度$10^{-6}$的验收阈值，最大约$2.09\times10^{-9}$。另在正文三市场108次拟合中，以独立有限差分检查梯度，最大投影梯度约$2.10\times10^{-9}$；新解训练SSE不高于对应单起点解（$10^{-7}$数值容差）。这支持一阶数值稳定性，不证明全局最优。
+
+保持输入、基准预测与求解规则不变，对比NumPy 2.5.4、SciPy 1.18.1、statsmodels 0.15.0与NumPy 1.26.4、SciPy 1.11.4、statsmodels 0.14.2两套环境，修订DEC三市场最大预测差异分别约为$8.05\times10^{-8}$、$9.32\times10^{-8}$及$4.40\times10^{-8}$，均小于$10^{-7}$。同一环境从保存输入再运行的预测逐点相同。原始历史环境仍不能唯一确定，且这些检查不替代真实发布时点或独立留出样本验证。
+
+本轮重新估计第二阶段及HAR、GARCH；第一阶段复用上一轮已验证的本地XGBoost预测，并核对日期、标签、目标及文件SHA256。公开运行入口可从原始输入完整重训XGBoost，复用缓存仅是有记录的加速选项。新旧指标、所有候选规格、求解诊断、依赖版本及30组共同日期区间结果见\path{results/revised/}；逐期数据、预测及运行日志保留本地，不属于分发范围。
+
+\section{独立核验范围与文献说明}
+公开版保留全部核心模型公式及历史结果档案；正文现采用稳定求解、消融和共同日期重分析，历史表与图件仍保留在项目原结果目录。历史结果不因复核而静默覆盖。逐项计算检查见随附\path{results/verification/}，复算程序见\path{scripts/audit_results.py}。算术复核、输入重建、候选重训及固定存档基准的第二阶段复算分别记录，不能相互替代；这些检查不证明原始预测在真实时间中可获得。
+
+原附录的中英文文献摘录在公开版改为简要阅读说明：Baker、Bloom与Davis提出基于新闻文本的EPU测度\citep{BakerBloomDavis2016}；Chen与Guestrin介绍XGBoost树提升系统及其实现\citep{ChenGuestrin2016}。本文的滚动绝对残差区间没有实现Xu与Xie的EnbPI算法，不能直接继承该算法的理论保证\citep{XuXie2021}。引用保留原学者姓名，以保证文献归属正确。

@@ -1,0 +1,2 @@
+K,weight_type,theta1,theta2,valid_MSE,n_stage2_train,n_stage2_valid
+24,expalmon,5.0,-4.248475475421604,5.534400383905481,299,200

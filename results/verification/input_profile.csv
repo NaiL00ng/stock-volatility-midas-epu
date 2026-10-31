@@ -1,0 +1,7 @@
+market,kind,n,duplicate_dates,start,end,missing_dates,zero_volume,nonpositive_close,missing_ohlcv,missing_months
+csi300,prices,3942,0,2010-01-04,2026-03-31,0,0.0,0.0,0.0,
+csi300,monthly_epu,315,0,2000-01-01,2026-03-01,0,,,,0.0
+SSE50,prices,3943,0,2010-01-04,2026-03-31,0,1.0,0.0,1.0,
+SSE50,monthly_epu,315,0,2000-01-01,2026-03-01,0,,,,0.0
+NASDAQZH,prices,4085,0,2010-01-04,2026-03-31,0,4.0,0.0,0.0,
+NASDAQZH,monthly_epu,1517,0,1900-01-01,2026-04-01,1,,,,0.0

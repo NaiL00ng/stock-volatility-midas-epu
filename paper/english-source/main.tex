@@ -1,0 +1,57 @@
+%!TEX program = xelatex
+% Original author content: CC-BY-4.0. Third-party rights are retained.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\setsansfont{lmsans10-regular.otf}[BoldFont=lmsans10-bold.otf,ItalicFont=lmsans10-oblique.otf,BoldItalicFont=lmsans10-boldoblique.otf]
+\setmonofont{lmmono10-regular.otf}[ItalicFont=lmmono10-italic.otf]
+\usepackage{amsmath,amssymb,booktabs,graphicx,float,tabularx,array,multirow,makecell,threeparttable}
+\usepackage{caption,subfigure,setspace,fancyhdr,chngcntr}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks,unicode]{hyperref}
+\hypersetup{pdftitle={Stock Volatility Forecasting with MIDAS EPU Correction},pdfauthor={Boursin Nickel},pdfsubject={English research edition; version 0.5-review; original content CC BY 4.0}}
+\setstretch{1.2}\setlength{\headheight}{15pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[C]{\small Volatility Forecasting with MIDAS EPU Correction}\fancyfoot[C]{\thepage}
+\counterwithin{table}{section}\counterwithin{figure}{section}\counterwithin{equation}{section}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\begin{titlepage}\centering\vspace*{2.6cm}
+{\LARGE\bfseries Stock Volatility Forecasting\\[0.5em]with MIDAS EPU Correction\par}
+\vspace{1cm}{\Large Stable Estimation, Residual Ablation,\\and Retrospective Reanalysis\par}
+\vspace{2cm}{\Large Boursin Nickel\par}
+\vspace{0.8cm}{\large English research edition\par}
+\vfill
+Version 0.5-review\par
+2026-10-31\par
+\vspace{1cm}
+\begin{minipage}{0.87\textwidth}\centering
+This edition reports the same revised experiments as the Chinese research manuscript. Historical evidence is retained separately. The analysis is exploratory and retrospective; it does not establish real-time forecasting validity.
+\end{minipage}
+\end{titlepage}
+\pagenumbering{Roman}
+\section*{Edition and licensing}
+\thispagestyle{plain}
+Copyright \copyright\ 2026 Boursin Nickel.
+
+The author's licensable paper text, narrative documentation, and original figures and tables are licensed under \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International (CC BY 4.0)}. Give appropriate credit, link the license, and indicate modifications without implying endorsement. The complete terms are provided in the accompanying \texttt{LICENSE-CONTENT.txt}.
+
+The author's licensable project code, executable examples, and runtime configurations are licensed under the Apache License, Version 2.0; see the project-root \texttt{LICENSE}. Third-party citations, adapted code, and embedded fonts retain their respective rights and conditions; see \texttt{THIRD\_PARTY\_NOTICES.md}. Neither project license grants rights to obtain, use, or redistribute underlying market or economic policy uncertainty data.
+
+This is an English research edition of the Chinese public revision, reorganized for readability rather than translated sentence by sentence. It preserves the experimental definitions, results, historical controls, and limitations. It is not a separate experiment or an independently validated replication. The date identifies this local revision, not a journal publication or a public repository release.
+
+Code citation metadata is supplied in \texttt{CITATION.cff}; edition-specific paper citations and compilation instructions are in \texttt{paper/README.md}. No repository URL, DOI, or publication venue is asserted.
+\clearpage
+\input{abstract}
+\tableofcontents\clearpage
+\pagenumbering{arabic}
+\input{introduction}
+\input{methods}
+\input{point_results}
+\input{interval_results}
+\input{robustness}
+\clearpage\input{conclusion}
+\clearpage\phantomsection\addcontentsline{toc}{section}{References}
+\nocite{*}\bibliographystyle{plainnat}\bibliography{../references}
+\clearpage\input{appendix}
+\end{document}

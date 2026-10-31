@@ -1,0 +1,13 @@
+# Candidate runtime tested on 2026-10-31; historical training environment is unknown.
+# See requirements-reproduction.txt for the tested environment.
+# Python 3.12 tested; other interpreter versions have not been validated.
+numpy
+pandas
+scipy
+statsmodels
+xgboost
+scikit-learn
+arch
+matplotlib
+seaborn
+openpyxl

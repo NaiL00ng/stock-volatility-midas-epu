@@ -1,0 +1,11 @@
+{
+  "excluded_date": "2018-06-18",
+  "original_rows": 3915,
+  "corrected_rows": 3919,
+  "corrected_split": {
+    "test": 1919,
+    "train": 1500,
+    "valid": 500
+  },
+  "status": "Corrected input built and all four models re-estimated in a separately labeled calendar-sensitivity experiment; historical outputs unchanged."
+}

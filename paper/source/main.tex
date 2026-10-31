@@ -1,0 +1,52 @@
+%!TEX program = xelatex
+\documentclass[UTF8,fontset=fandol,11pt,a4paper]{ctexart}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx,float,tabularx,array,multirow,makecell,threeparttable}
+\usepackage{caption,subfigure,setspace,fancyhdr,chngcntr}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks,unicode]{hyperref}
+\hypersetup{pdftitle={股指波动率预测与动态误差修正},pdfauthor={Boursin Nickel},pdfsubject={Public research revision; original content CC BY 4.0}}
+\setstretch{1.35}\setlength{\headheight}{15pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[C]{股指波动率预测与动态误差修正}\fancyfoot[C]{\thepage}
+\counterwithin{table}{section}\counterwithin{figure}{section}\counterwithin{equation}{section}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\begin{titlepage}\centering\vspace*{3cm}
+{\LARGE 基于机器学习与动态误差修正的\\[0.6em]股指波动率预测研究\par}
+\vspace{2cm}{\Large Boursin Nickel\par}\vspace{1cm}{\large 公开研究修订版\par}
+\vfill
+本文保留历史证据，并报告稳定求解、数据修正及消融重分析。\\
+XGBoost历史预测已重现；正文采用修订后的DEC实验。\\[1em]
+2026-10-31
+\end{titlepage}
+\pagenumbering{Roman}
+\section*{版本与许可说明}
+\thispagestyle{plain}
+Copyright \copyright\ 2026 Boursin Nickel。
+
+作者有权许可的论文文字、原创图表和说明文档采用
+\href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International（CC BY 4.0）}。
+复用时请适当署名、提供许可链接并说明修改；不得暗示作者背书。
+完整条款见随包的LICENSE-CONTENT.txt。
+
+配套项目中作者有权许可的代码、可执行示例及运行配置采用Apache License 2.0；完整条款见项目根目录LICENSE。
+第三方引文、适配代码及内嵌字体保留各自权利与许可，详见THIRD\_PARTY\_NOTICES.md。
+这些许可不授予底层行情或EPU数据的使用、获取或再分发权。
+
+本稿对应0.5-review候选版，整理日期为2026-10-31，尚非正式公开发布日期。
+配套英文研究稿与本稿采用同一组修订实验、数值和限制，不代表新增实验或独立验证。
+本文属于回顾性探索研究；稳定数值求解不等于实时可得性、全局最优或经济因果关系已获验证。
+\clearpage
+\input{abstract}
+\tableofcontents\clearpage
+\pagenumbering{arabic}
+\input{introduction}
+\input{methods}
+\input{point_results}
+\input{interval_results}
+\input{robustness}
+\clearpage\input{conclusion}
+\clearpage\phantomsection\addcontentsline{toc}{section}{参考文献}
+\nocite{*}\bibliographystyle{plainnat}\bibliography{../references}
+\clearpage\input{appendix}
+\end{document}

@@ -1,0 +1,81 @@
+{
+  "status": "Shared feature and split settings plus historical XGBoost matching metadata. Current paper uses scripts/run_dec_revision.py, configs/dec-revision.json and results/revised; legacy DEC results remain separate.",
+  "common": {
+    "eps": 1e-08,
+    "n_valid": 500,
+    "refit_every": 20,
+    "random_state": 2026,
+    "midas_refit_every": 60,
+    "midas_k_grid": [
+      6,
+      12,
+      24
+    ],
+    "midas_weight_types": [
+      "beta",
+      "expalmon"
+    ],
+    "stage2_valid_train_frac": 0.6,
+    "stage2_min_train_obs": 80,
+    "stage2_min_valid_obs": 40,
+    "garch_dist": "t",
+    "garch_refit_every": 20
+  },
+  "xgboost": {
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 4,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "objective": "reg:squarederror",
+    "random_state": 2026,
+    "n_jobs": -1
+  },
+  "markets": {
+    "csi300": {
+      "prices": "CSI300_daily_20100104_20260331.xlsx",
+      "epu": "epu_newVersion_2000-2026.xlsx",
+      "n_train": 1500,
+      "archive_prefix": "csi300"
+    },
+    "sse50": {
+      "prices": "SSE50_daily_20100104_20260331.xlsx",
+      "epu": "epu_newVersion_2000-2026.xlsx",
+      "n_train": 1500,
+      "archive_prefix": "SSE50"
+    },
+    "nasdaq": {
+      "prices": "NASDAQZH_daily_20100101_20260331.xlsx",
+      "epu": "US_Policy_Uncertainty_Data.xlsx",
+      "n_train": 2000,
+      "archive_prefix": "NASDAQZH"
+    }
+  },
+  "historical_reproduction": {
+    "implementation": "XGBoost 2.0.3 with documented MSVC-compatible column shuffle",
+    "tree_method_effective": "hist",
+    "max_bin": 256,
+    "base_score": "estimated from each expanding training sample",
+    "feature_order": [
+      "log_rv1",
+      "log_rv5",
+      "log_rv22",
+      "ret_pos",
+      "ret_neg",
+      "range_log",
+      "range_log_5",
+      "log_volume",
+      "dlog_volume"
+    ],
+    "early_stopping": false,
+    "feature_winsorization": false,
+    "feature_standardization": false,
+    "reproduced_xgb_predictions": 6888,
+    "thread_count_in_matched_run": 4,
+    "version_identity": "not uniquely recovered",
+    "data_quality_warning": "SSE50 historical input contains the confirmed non-trading date 2018-06-18; historical reproduction is not a cleaned-data experiment."
+  }
+}

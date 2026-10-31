@@ -1,0 +1,33 @@
+{
+  "numpy": "2.5.4",
+  "pandas": "3.1.0",
+  "scipy": "1.18.1",
+  "statsmodels": "0.15.0",
+  "scikit-learn": "1.9.1",
+  "python": "3.12.14",
+  "system": "Darwin",
+  "architecture": "arm64",
+  "xgboost": "2.0.3",
+  "sampling": "msvc",
+  "binary_sha256": "426460f3aaf2c0cb5b6bd44230e89108da2931aaebdcb025c0efa187dfe4f96b",
+  "build_info": {
+    "BUILTIN_PREFETCH_PRESENT": true,
+    "CLANG_VERSION": [
+      21,
+      0,
+      0
+    ],
+    "DEBUG": false,
+    "MM_PREFETCH_PRESENT": false,
+    "USE_CUDA": false,
+    "USE_FEDERATED": false,
+    "USE_NCCL": false,
+    "USE_OPENMP": true,
+    "USE_RMM": false
+  },
+  "status": "Numerically equivalent XGBoost reproduction; not a recovered historical environment",
+  "native_source_version": "2.0.3",
+  "source_random_cc_sha256": "0950f1ded9db8521cb96550251712b00f0b25a47135eb4453d39da32ddbbc276",
+  "patched_random_cc_sha256": "6a82004c58f5476b95bc7c0a10853cd8827ece30e44f2c4ba23cd545c381df29",
+  "compatibility_rule": "Microsoft STL vs-2022-17.6 ascending shuffle with rejection/modulo integer mapping"
+}

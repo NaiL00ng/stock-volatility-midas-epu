@@ -1,0 +1,79 @@
+\appendix
+\section{Training configuration, platform sampling, and historical controls}
+\label{app:training}
+The surviving main script and historical discussion records use depth 4 and 300 trees. Changing Python dependency versions alone did not match the archive. Holding inputs and parameters fixed while replacing the platform-dependent column-shuffle behavior allowed XGBoost 2.0.3 CPU histogram training to reproduce all 6888 archived predictions. The compatibility path follows Microsoft STL 17.6 sampling behavior while retaining the original mt19937 engine. It does not search random seeds or optimize test losses to fit historical outputs. Native macOS sampling remains a nonmatching control.
+
+This establishes a numerically equivalent configuration, not unique identification of the original compiler, operating system, installed package version, or complete library stack. The former appendix's depth 3, minimum child weight 5, zero $L_1$ penalty, and early stopping after 50 rounds do not describe the matched experiment. Table~\ref{tab:training_configuration} gives the corrected record.
+
+\begin{table}[htbp]\centering\small
+\caption{Configuration numerically matching the archived XGBoost forecasts.}
+\label{tab:training_configuration}
+\begin{tabularx}{\textwidth}{lX}\toprule Parameter & Value or behavior\\\midrule
+\texttt{n\_estimators / learning\_rate} & 300 / 0.05\\
+\texttt{max\_depth / min\_child\_weight} & 4 / 3\\
+\texttt{subsample / colsample\_bytree} & 0.8 / 0.8\\
+\texttt{reg\_alpha / reg\_lambda} & 0.1 / 1.0\\
+\texttt{objective / random\_state} & Squared error / 2026\\
+Tree construction / maximum bins & CPU histogram / 256\\
+Initial intercept & Estimated from training labels at each fit\\
+Column sampling & Microsoft STL 17.6-compatible shuffle\\
+Early stopping, winsorization, scaling & None in this matched workflow\\
+HAR / XGB / GARCH refit interval & 20 retained observations\\
+MIDAS refit interval & 60 retained observations\\
+MIDAS candidates & 6, 12, 24 months; Beta and exponential Almon\\\bottomrule
+\end{tabularx}
+\end{table}
+
+Historical train/validation/test counts are 1500/500/1919 for CSI300, 1500/500/1915 for SSE50, and 2000/500/1554 for Nasdaq. The nine market features retain their configured order. Thread counts 1, 2, 4, 8, and the default give identical predictions in the first-validation-block control; the full matching run uses four threads.
+
+\subsection{Full historical reproduction}
+Table~\ref{tab:reproduction_difference} compares reconstructed-input forecasts with archived predictions. XGBoost differences cover validation and test predictions; DEC differences cover the test period. In this historical reproduction stage, DEC uses the newly retrained, matching XGBoost predictions, not an archived first-stage prediction cache.
+
+\begin{table}[htbp]\centering
+\caption{Maximum absolute log-forecast differences from the archive after sampling compatibility.}
+\label{tab:reproduction_difference}
+\begin{tabular}{lrrr}\toprule Market & XGB predictions & XGB difference & DEC difference\\\midrule
+CSI300 & 2419 & 0 & 0.002670\\
+SSE50 & 2415 & 0 & $1.28\times10^{-5}$\\
+Nasdaq & 2054 & 0 & 0.003035\\\bottomrule
+\end{tabular}
+\end{table}
+
+Legacy DEC still fails a uniform absolute tolerance of $10^{-6}$. With baseline forecasts fixed, changing numerical-library combinations or round-tripping equivalent inputs through CSV causes small second-stage differences. These controls demonstrate sensitivity but do not uniquely identify the cause of the historical discrepancy. The legacy specification family and lag length remain unchanged in that forensic comparison. Original plot metadata identifies Matplotlib 3.7.2, which cannot identify the original SciPy or XGBoost versions.
+
+An earlier native-macOS XGBoost 3.4.1 run had maximum cross-market differences of $4.62\times10^{-14}$ for HAR, $7.14\times10^{-5}$ for GARCH, 1.7851 for XGBoost, and 1.5048 for DEC. That run is distinct from the compatible 2.0.3 experiment. The ordinary \path{requirements-reproduction.txt} is not a unique historical lockfile. Installing an official macOS 2.0.3 wheel alone does not supply the compatible column sampling; build instructions, patch provenance, and runtime fingerprints are recorded separately.
+
+\subsection{Separate SSE50 calendar-control experiment}
+The earlier calendar control retrained four models with the same compatible build and numerical environment, once on original inputs and once after deleting the confirmed 2018-06-18 holiday before reconstruction. Table~\ref{tab:calendar_sensitivity} evaluates both sets of forecasts on the same 1915 dates and uses the corrected target for both. It retains the legacy single-start DEC method, so it must not be confused with the current five-model stable-solver results.
+
+\begin{table}[htbp]\centering\small
+\caption{Historical calendar control on common dates with a unified corrected target.}
+\label{tab:calendar_sensitivity}
+\begin{tabular}{lrrrr}\toprule
+& \multicolumn{2}{c}{MSE} & \multicolumn{2}{c}{QLIKE}\\
+Model & Original inputs & Corrected inputs & Original inputs & Corrected inputs\\\midrule
+HAR & 4.820334 & 4.820717 & 3.877497 & 3.874467\\
+GARCH & 7.521221 & 7.524687 & 1.585780 & 1.585427\\
+XGB-Market & 4.902582 & 4.933710 & 4.507373 & 4.756812\\
+DEC & 4.931264 & 4.962050 & 3.528922 & 3.672719\\\bottomrule
+\end{tabular}
+\end{table}
+
+QLIKE ordering in this control remains GARCH, DEC, HAR, then XGBoost, but the values change. The effects include rolling features, training observations, and refit positions, not merely one artificial target. Deleting a single loss observation cannot substitute for reconstructing the pipeline. This control does not resolve all calendar validity, EPU release timing, or numerical-estimation issues.
+
+\section{Verification of the revised DEC method}
+\label{app:solver}
+Legacy DEC reproduction on historical inputs changes CSI300 MSE by approximately $+0.000094$ and QLIKE by $-0.000362$ relative to the archive. SSE50 and Nasdaq show extremely small decreases in MSE, MAE, and QLIKE. Those are numerical-environment differences and do not reverse the model rankings. The stable-method revision in the main text is a separate experiment, not exact restoration of legacy DEC.
+
+The current revision includes three main-market cases plus an SSE50 historical-input control, totaling 146 specification and test-refit estimations. All selected solutions satisfy the mean-SSE projected-gradient threshold of $10^{-6}$; the largest diagnostic is about $2.09\times10^{-9}$. Independent bounded finite-difference checks for the 108 main-market fits give a maximum projected gradient of about $2.10\times10^{-9}$. The new training SSE is no greater than the corresponding single-start value within a numerical tolerance of $10^{-7}$. This supports first-order numerical stability, not global optimality.
+
+Holding inputs, first-stage forecasts, and estimation rules fixed, comparisons between NumPy 2.5.4/SciPy 1.18.1/statsmodels 0.15.0 and NumPy 1.26.4/SciPy 1.11.4/statsmodels 0.14.2 give maximum revised DEC forecast differences of $8.05\times10^{-8}$, $9.32\times10^{-8}$, and $4.40\times10^{-8}$ for CSI300, SSE50, and Nasdaq. Each is below $10^{-7}$. Repeating from saved inputs within the same environment gives identical predictions. These are the tested stacks, not a claim of invariance across every platform or dependency version.
+
+In the current research revision, DEC, XGB-AR, HAR, and GARCH are re-estimated. The first stage reuses a previously verified local XGBoost cache after checking dates, sample flags, targets, and SHA256. The public current entry point can retrain XGBoost from authorized raw inputs; cache reuse is a documented acceleration option. It is not described as a new full first-stage training run.
+
+Current and historical comparisons, six-candidate searches, optimizer diagnostics, dependency records, and all 30 common-date interval settings are supplied under \path{results/revised/}. Per-period private inputs, predictions, models, and local logs are excluded from the distribution. The synthetic example uses invented data to exercise the implementation and does not reproduce the paper's empirical results.
+
+\section{Verification scope and source attribution}
+The public research archive preserves the core model definitions and historical outputs. Current text uses stable estimation, residual ablation, and common-date evaluation; historical figures and tables remain in their original result directories. Arithmetic checking, input reconstruction, candidate retraining, and second-stage checks with fixed baseline forecasts are recorded separately. None alone establishes that all original inputs were genuinely available at their recorded forecast origins.
+
+Detailed public checks are in \path{results/verification/}, with calculation procedures including \path{scripts/audit_results.py}. The original long literature excerpts were replaced by brief reading notes: \citet{BakerBloomDavis2016} develops news-based EPU measurement, and \citet{ChenGuestrin2016} describes the XGBoost system. The present rolling absolute-residual intervals do not implement EnbPI \citep{XuXie2021} and cannot directly inherit its theoretical guarantees. Scholarly names and bibliographic institutions are retained for correct attribution; they are not identifying affiliations of this project's author.

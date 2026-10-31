@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-31",
+  "scope": "Expected sample counts for the recorded inputs; not universal sizes for arbitrary new data. Dates refer to forecast origins, not target dates.",
+  "current_entry": "scripts/run_dec_revision.py",
+  "current_results": "results/revised/point_metrics.csv",
+  "models": [
+    "HAR",
+    "GARCH",
+    "XGB_Market",
+    "XGB_Residual_AR",
+    "XGB_MIDAS_EPU_DEC"
+  ],
+  "cases": [
+    {
+      "case": "csi300",
+      "market": "csi300",
+      "input_variant": "historical_input",
+      "role": "current_paper",
+      "n_prepared": 3919,
+      "n_train": 1500,
+      "n_valid": 500,
+      "n_test": 1919,
+      "test_origin_start": "2018-05-03",
+      "test_origin_end": "2026-03-30"
+    },
+    {
+      "case": "sse50",
+      "market": "sse50",
+      "input_variant": "calendar_corrected",
+      "role": "current_paper",
+      "n_prepared": 3919,
+      "n_train": 1500,
+      "n_valid": 500,
+      "n_test": 1919,
+      "test_origin_start": "2018-05-03",
+      "test_origin_end": "2026-03-30"
+    },
+    {
+      "case": "nasdaq",
+      "market": "nasdaq",
+      "input_variant": "historical_input",
+      "role": "current_paper",
+      "n_prepared": 4054,
+      "n_train": 2000,
+      "n_valid": 500,
+      "n_test": 1554,
+      "test_origin_start": "2020-01-23",
+      "test_origin_end": "2026-03-30"
+    },
+    {
+      "case": "sse50_historical_input",
+      "market": "sse50",
+      "input_variant": "historical_input",
+      "role": "historical_control",
+      "n_prepared": 3915,
+      "n_train": 1500,
+      "n_valid": 500,
+      "n_test": 1915,
+      "test_origin_start": "2018-05-03",
+      "test_origin_end": "2026-03-30"
+    }
+  ],
+  "csi300_descriptive": {
+    "price_rows": 3942,
+    "return_rows": 3941
+  },
+  "stage2_selection": {
+    "validation_rows": 500,
+    "usable_residual_pairs": 499,
+    "train": 299,
+    "score": 200
+  },
+  "csi300_intervals": {
+    "common_dates": 1859,
+    "origin_start": "2018-07-27",
+    "origin_end": "2026-03-30",
+    "models": 5,
+    "settings": 30
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "excluded_source_date": "2018-06-18",
+  "historical_test_n": 1915,
+  "corrected_test_n": 1919,
+  "common_dates": 1915,
+  "changed_targets_on_common_dates": 1,
+  "status": "New data-cleaning sensitivity experiment; common-date scores use the corrected target for both prediction sets."
+}

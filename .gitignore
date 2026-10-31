@@ -1,0 +1,24 @@
+# Local data is not part of the initial publication set.
+/data/*
+!/data/README.md
+/generated/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+.DS_Store
+*.log
+*.aux
+*.blg
+*.toc
+*.synctex.gz
+
+# Paper build products; the reviewed PDF lives one directory above.
+/paper/source/main.pdf
+/paper/english-source/main.pdf
+*.bbl
+*.out
+*.fls
+*.fdb_latexmk
