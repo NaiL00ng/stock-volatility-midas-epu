@@ -32,7 +32,7 @@ python3.12 -m venv .venv
 
 当前真实数据实验使用`run_dec_revision.py`及`run_revised_intervals.py`，需要自备有权使用的输入及兼容构建。`run_experiments.py`保留作历史入口。三市场测试数量依次为1919、1919、1554；CSI300区间统一1859条，见[样本口径](configs/sample-splits.json)。
 
-### 从哪里开始
+### 从何处开始
 
 中英文论文均已提供，配套技术说明目前以中文为主。
 
